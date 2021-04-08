@@ -28,3 +28,18 @@ function simplifiedEuclideanDistance(p1, p2){
 
     return dist;
 }
+
+/* Return distance between two points in euclidean space */
+function euclideanDistance(p1, p2){
+    if(p1.length != p2.length){
+        throw new Error("Dimensionality Error");
+    }
+
+    let dist = 0, n = p1.length;
+
+    for(let x = 0; x < n; ++x){
+        dist += (p1[x] - p2[x])**2
+    }
+    
+    return Math.sqrt(dist);
+}

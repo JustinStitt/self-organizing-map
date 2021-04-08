@@ -1,6 +1,9 @@
 /* Hyperparameters */
 const NUM_CLASSES   = 3; // possible ids 0, 1, 2
 const LEARNING_RATE = .2;
+const TOPOLOGICAL_NEIGHBOURHOOD = .3;
+
+const VISU_ADJUST   = .10; // how much to adjust color
 
 /* setup parameters */
 const CELL_SIZE    = 30;
