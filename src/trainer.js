@@ -6,7 +6,7 @@ function train(){
     // go through each vector in training_data
     for(let x = 0; x < N; ++x){
         let inp = [...training_data[x]].splice(0, M-1);
-        let label = training_data[x][training_data[x].length-1];
+        let label = training_data[x][training_data[x].length-1] - 1;
         let winner = compete(inp);
         let neighbours = getNeighbours(winner.idx);
         network[winner.idx].shift(label);

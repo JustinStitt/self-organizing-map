@@ -13,7 +13,7 @@ class Node{
     /* Draw this node at pos r,c with its color */
     draw(){
         fill(this.color);
-        //stroke(this.color);
+        stroke(this.color);
         rect(this.r*CELL_SIZE, this.c*CELL_SIZE, 
                     CELL_SIZE, CELL_SIZE);
     }
@@ -28,6 +28,11 @@ class Node{
 
         for(let x = 0; x < available.length; ++x){
             this.color[available[x]] = Math.floor(this.color[available[x]] * (1-VISU_ADJUST));
+        }
+
+        // clamping colors
+        for(let x = 0; x < 3; ++x){
+            if(this.color[x] > 255) this.color[x] = 255;
         }
     }
 

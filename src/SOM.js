@@ -29,5 +29,6 @@ function draw(){//p5.js update loop
     frame++;
     if(frame % FRAME_BUFFER) return;
     background(BACKGROUND_COLOR);
+    train();
     drawLattice();
 }
