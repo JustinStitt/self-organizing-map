@@ -39,6 +39,7 @@ function compete(inp){
     return {idx: _best, distance: _dist};
 }
 
+const idx = (_r, _c) => { return _r * ROWS + _c };
 
 /* Return an array of neighbouring Nodes to Node(r,c) */
 function getNeighbours(i){
@@ -46,7 +47,6 @@ function getNeighbours(i){
     let r = Math.floor(i / ROWS);
     let c = i % COLS;
     /* Interpolate 2D to 1D coords */
-    const idx = (_r, _c) => { return _r * ROWS + _c };
 
     if(r + 1 < ROWS) neighbours.push(network[idx(r+1,c)]); // NORTH
     if(r - 1 >= 0)   neighbours.push(network[idx(r-1,c)]); // SOUTH

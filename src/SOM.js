@@ -1,12 +1,14 @@
 /* Hyperparameters */
 const NUM_CLASSES   = 3; // possible ids 0, 1, 2
-const LEARNING_RATE = .2;
-const TOPOLOGICAL_NEIGHBOURHOOD = .3;
+let LEARNING_RATE   = .6; // tendency to learn
+const TOPOLOGICAL_NEIGHBOURHOOD = 2; // DFS limit for neighbours
+const GAMMA   = .5;   // how much should neighbours change color relative to target
+const EPSILON = 0.01; // stopping threshhold... learning is all but gone
 
 const VISU_ADJUST   = .10; // how much to adjust color
 
 /* setup parameters */
-const CELL_SIZE    = 30;
+const CELL_SIZE    = 40;
 const ROWS         = 21;
 const COLS         = 21;
 const HEIGHT       = ROWS * CELL_SIZE;
