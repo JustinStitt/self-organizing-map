@@ -38,3 +38,4 @@ function compete(inp){
     */
     return {idx: _best, distance: _dist};
 }
+
