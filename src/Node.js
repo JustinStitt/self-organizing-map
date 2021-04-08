@@ -37,11 +37,12 @@ class Node{
     }
 
     /* Adjust weights for Given node */
-    adjust(target){
+    adjust(target, label){
         const N = this.w.length;
         for(let x = 0; x < N; ++x){
             this.w[x] = this.w[x] + (LEARNING_RATE*(target[x]-this.w[x]));
         }
+        this.shift(label);
     }
 
 }

@@ -9,11 +9,9 @@ function train(){
         let label = training_data[x][training_data[x].length-1] - 1;
         let winner = compete(inp);
         let neighbours = getNeighbours(winner.idx);
-        network[winner.idx].shift(label);
-        network[winner.idx].adjust(inp);
+        network[winner.idx].adjust(inp, label);
         for(let y = 0; y < neighbours.length; ++y){
-            neighbours[y].adjust(network[winner.idx].weights);
-            neighbours[y].shift(label);
+            neighbours[y].adjust(network[winner.idx].weights, label);
         }
     }
 }
