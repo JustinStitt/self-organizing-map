@@ -39,3 +39,19 @@ function compete(inp){
     return {idx: _best, distance: _dist};
 }
 
+
+/* Return an array of neighbouring Nodes to Node(r,c) */
+function getNeighbours(r, c){
+    let neighbours = Array();
+
+    /* Interpolate 2D to 1D coords */
+    const idx = (r, c) => { return r * ROWS + c };
+
+    if(r + 1 < ROWS) neighbours.push(network[idx(r+1,c)]); // NORTH
+    if(r - 1 >= 0)   neighbours.push(network[idx(r-1,c)]); // SOUTH
+    if(c + 1 < COLS) neighbours.push(network[idx(r,c+1)]); // EAST
+    if(c - 1 >= 0)   neighbours.push(network[idx(r,c-1)]); // WEST
+
+    // min 2 neighbours (if r,c is corner)
+    return neighbours;
+}
