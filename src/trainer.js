@@ -20,11 +20,11 @@ function* train(){
         /* Invoke recursive func to adjust all in top. neigh. no repeats */
         network[winner.idx].adjust(inp, label, VISU_ADJUST, 
                                 TOPOLOGICAL_NEIGHBOURHOOD, new Set());
-        yield;
+        yield x;
     }
     epoch += 1;
     /* after epoch, update learning rate hyperparameter */
-    LEARNING_RATE *= 1 - epoch/12;
+    LEARNING_RATE *= 1 - epoch/15;
     yield* train();
 }
 

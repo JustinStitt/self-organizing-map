@@ -27,7 +27,7 @@ function setup(){
     parseTrainingData(); // training_data.js
     createDiv('speed: ');
     fSlider = createSlider(0, FRAME_BUFFER, 
-        FRAME_BUFFER, 1);
+        FRAME_BUFFER/1.5, 1);
 }
 
 /* Display epoch on screen */
@@ -40,11 +40,11 @@ function drawEpoch(){
     text(msg, WIDTH - 150, HEIGHT - 15);
 }
 
-function drawIndex(){
+function drawIndex(idx){
     textSize(20);
     stroke('WHITE');
     fill('BLACK');
-    let msg = 'idx: ' + frame%training_data.length;
+    let msg = 'idx: ' + idx.toString();
     text(msg, WIDTH - 120, HEIGHT - 55);
 }
 
@@ -56,8 +56,8 @@ function draw(){//p5.js update loop
     frame++;
     if(frame % (FRAME_BUFFER - fSlider.value())) return;
     background(BACKGROUND_COLOR);
-    trainer.next();
+    let idx = trainer.next().value;
     drawLattice();
     drawEpoch();
-    if(!trained) drawIndex();
+    if(!trained) drawIndex(idx);
 }
