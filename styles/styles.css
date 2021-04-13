@@ -4,8 +4,29 @@ body {
   text-align: center;
   font-family: sans-serif;
 }
-canvas {
-  background-color: rgb(0, 0, 0);
+
+.canvas__wrapper {
+  background-color: yellow;
+  
+}
+
+.contents {
+  display: flex;
+  justify-content: center;
+  margin-left: 29%;
+}
+
+.testing__input {
+  margin-left: 150px;
+  width: 250px;
+}
+
+.data__entry {
+  height: 100%;
+  width:  100%;
+  background-color: rgb(42, 42, 44);
+  color: white;
+  border-radius: 10px;
 }
 
 .wilder {
@@ -18,5 +39,3 @@ canvas {
   background-color: gold;
 }
 
-.wilder__header {
-}

@@ -72,3 +72,25 @@ function test(targets, labels){
     /* Ratio of correct to total... accuracy */
     return correct/predictions.length;
 }
+
+/* Run Tests and Compute Accuracy */
+function runTestsButton(){
+    parseTestingData();
+    let N = testing_data.length, M = testing_data[0].length;
+    let correct = 0;
+
+    for(let x = 0; x < N; ++x){
+        // split input vector and label
+        let inp = [...testing_data[x]].splice(0, M-1);
+        console.log('inp: ', inp);
+        /* Last column is label (correct answer) */
+        let label = testing_data[x][M-1];
+        console.log('label: ', label);
+        let predicted_label = predict(inp);
+        if(predicted_label == label) correct += 1;
+    }
+
+    let accuracy = correct/N * 100;
+    console.log("accuracy: ", accuracy);
+    document.getElementById("testing__accuracy").innerHTML = "Accuracy: " + accuracy.toFixed(2) + "%";
+}

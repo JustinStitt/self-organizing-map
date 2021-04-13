@@ -4,6 +4,8 @@ const RAW_TRAINING_DATA = "(1 (5 5 -53.5) 1)(2 (5 4 -18.8) 2)(3 (5 3 -6.9) 2)(4 
 const patt = /(?<=\()(-?\d+\.?\d{0,} ?)+\) \d/g;
 
 let training_data = Array();
+let testing_data = Array();
+
 
 /* Convert raw training data to a 4-attr array */
 function parseTrainingData(){
@@ -19,4 +21,22 @@ function parseTrainingData(){
         training_data.push(vec);
     }
     return training_data;
+}
+
+function parseTestingData(){
+    // wipe previous testing_data
+    testing_data = Array();
+    let RAW_TESTING_DATA = document.getElementById("data__entry").value;
+    let matches = RAW_TESTING_DATA.match(patt);
+    for(let x = 0; x < matches.length; ++x){
+        matches[x] = matches[x].replaceAll(")", ""); // remove trailing parenthesis
+        // split match by spaces
+        let spliced = matches[x].split(" ");
+        let vec = Array();
+        for(let i = 0; i < spliced.length; ++i){
+            vec.push(parseFloat(spliced[i]));
+        }
+        testing_data.push(vec);
+    }
+    return testing_data;
 }
