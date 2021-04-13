@@ -26,6 +26,13 @@ function setup(){
     parseTrainingData(); // training_data.js
 }
 
+/* Display epoch on screen */
+function drawEpoch(){
+    textSize(25);
+    fill('BLACK');
+    text("epoch: " + epoch.toString(), WIDTH - 150, HEIGHT - 15);
+}
+
 /* ran once per frame modulo frame_buffer */
 function draw(){//p5.js update loop
     frame++;
@@ -33,4 +40,5 @@ function draw(){//p5.js update loop
     background(BACKGROUND_COLOR);
     train();
     drawLattice();
+    drawEpoch();
 }
