@@ -5,10 +5,10 @@ const TOPOLOGICAL_NEIGHBOURHOOD = 2; // DFS limit for neighbours
 const GAMMA   = .5;   // how much should neighbours change color relative to target
 const EPSILON = 0.01; // stopping threshhold... learning is all but gone
 
-const VISU_ADJUST   = .10; // how much to adjust color
+const VISU_ADJUST   = .20; // how much to adjust color
 
 /* setup parameters */
-const CELL_SIZE    = 40;
+const CELL_SIZE    = 20;
 const ROWS         = 21;
 const COLS         = 21;
 const HEIGHT       = ROWS * CELL_SIZE;
@@ -20,25 +20,44 @@ let frame          = 0;
 
 /* p5.js bootstrapping */
 function setup(){
-    createCanvas(WIDTH, HEIGHT);
+    let canv = createCanvas(WIDTH, HEIGHT);
+    canv.parent("canvas__wrapper");
     createLattice();
     drawLattice();       // initial lattice drawing
     parseTrainingData(); // training_data.js
+    createDiv('speed: ');
+    fSlider = createSlider(0, FRAME_BUFFER, 
+        FRAME_BUFFER, 1);
 }
 
 /* Display epoch on screen */
 function drawEpoch(){
     textSize(25);
+    stroke('WHITE');
     fill('BLACK');
-    text("epoch: " + epoch.toString(), WIDTH - 150, HEIGHT - 15);
+    let msg = "epoch: " + epoch.toString();
+    if(trained) msg = "trained";
+    text(msg, WIDTH - 150, HEIGHT - 15);
 }
+
+function drawIndex(){
+    textSize(20);
+    stroke('WHITE');
+    fill('BLACK');
+    let msg = 'idx: ' + frame%training_data.length;
+    text(msg, WIDTH - 120, HEIGHT - 55);
+}
+
+let trainer;
 
 /* ran once per frame modulo frame_buffer */
 function draw(){//p5.js update loop
+    if(frame == 0) trainer = train();
     frame++;
-    if(frame % FRAME_BUFFER) return;
+    if(frame % (FRAME_BUFFER - fSlider.value())) return;
     background(BACKGROUND_COLOR);
-    train();
+    trainer.next();
     drawLattice();
     drawEpoch();
+    if(!trained) drawIndex();
 }

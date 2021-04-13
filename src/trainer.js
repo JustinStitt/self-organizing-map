@@ -1,8 +1,10 @@
-let epoch = 1; // starting epoch (episode)
+let epoch = 0; // starting epoch (episode)
+let trained = false;
+let pwinner = -1;
 
 /* Train network with training data */
-function train(){
-    if(LEARNING_RATE < EPSILON) return; // training done
+function* train(){
+    if(LEARNING_RATE < EPSILON) {trained = true; return;}; // training done
     const N = training_data.length, M = training_data[0].length;
     // go through each vector in training_data
     for(let x = 0; x < N; ++x){
@@ -18,16 +20,39 @@ function train(){
         /* Invoke recursive func to adjust all in top. neigh. no repeats */
         network[winner.idx].adjust(inp, label, VISU_ADJUST, 
                                 TOPOLOGICAL_NEIGHBOURHOOD, new Set());
+        yield;
     }
     epoch += 1;
-
     /* after epoch, update learning rate hyperparameter */
-    LEARNING_RATE *= 1 - epoch/100;
+    LEARNING_RATE *= 1 - epoch/12;
+    yield* train();
+}
+
+/* When html <button/> is pressed */
+function predictWilderButton(){
+    // fetch wilder input data
+    let x = document.getElementById("wilder__input1").value;
+    let y = document.getElementById("wilder__input2").value;
+    let z = document.getElementById("wilder__input3").value;
+
+    if(x == "" || y == "" || z == "") throw new Error("Wilder Input Error.");
+
+    // create wilder vector given string data
+    let wilder_vector = [parseFloat(x), parseFloat(y), parseFloat(z)];
+    // get prediction from trained model
+    let prediction = predict(wilder_vector);
+    document.getElementById('wilder__prediction').innerHTML = "Prediction: " + prediction.toString();
+    console.log('prediction: ', prediction);
 }
 
 /* Ask trained model to predict id of given target */
 function predict(target){
+    // toggle off previous winner display
+    if(pwinner != -1) network[pwinner].winner = false;
     let winner = compete(target);
+    network[winner.idx].winner = true;
+    // set new previous winner
+    pwinner = winner.idx;
     return network[winner.idx].id + 1;
 }
 

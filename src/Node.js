@@ -6,6 +6,8 @@ class Node{
         this.r     = r;
         this.c     = c;
         this.idx = idx(r, c);
+        this.winner = false;
+        this.winner_toggle = 0;
     }
 
     /* Fetch this Node's weight vector */
@@ -14,6 +16,12 @@ class Node{
     /* Draw this node at pos r,c with its color */
     draw(){
         fill(this.color);
+        if(this.winner){
+            if(this.winner_toggle % 3 == 0){
+                fill('YELLOW');
+            }
+            this.winner_toggle += 1;
+        }
         stroke(this.color);
         rect(this.r*CELL_SIZE, this.c*CELL_SIZE, 
                     CELL_SIZE, CELL_SIZE);
