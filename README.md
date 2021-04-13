@@ -5,7 +5,7 @@ A SOM implemented in JS and visualized with p5
 
 ### GIF
 
-![](./media/SOM-GIF.gif)
+![](./media/SOM-gif.gif)
 
 ### Image
 ![](./media/SOM-SS.png)
