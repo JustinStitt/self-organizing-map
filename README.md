@@ -9,3 +9,7 @@ A SOM implemented in JS and visualized with p5
 
 ### Image
 ![](./media/SOM-SS.png)
+
+
+### Running
+Add p5.js to src directory
