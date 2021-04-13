@@ -5,6 +5,7 @@ let pwinner = -1;
 /* Train network with training data */
 function* train(){
     if(LEARNING_RATE < EPSILON) {trained = true; return;}; // training done
+    if(pwinner != -1) network[pwinner].winner = false;
     const N = training_data.length, M = training_data[0].length;
     // go through each vector in training_data
     for(let x = 0; x < N; ++x){
@@ -41,7 +42,12 @@ function predictWilderButton(){
     let wilder_vector = [parseFloat(x), parseFloat(y), parseFloat(z)];
     // get prediction from trained model
     let prediction = predict(wilder_vector);
-    document.getElementById('wilder__prediction').innerHTML = "Prediction: " + prediction.toString();
+    let pred = document.getElementById('wilder__prediction');
+    pred.innerHTML = "Prediction: " + prediction.toString();
+    let color = "red";
+    if(prediction == 2) color = "green";
+    if(prediction == 3) color = "blue";
+    pred.style.color = color;
     console.log('prediction: ', prediction);
 }
 
@@ -91,6 +97,6 @@ function runTestsButton(){
     }
 
     let accuracy = correct/N * 100;
-    console.log("accuracy: ", accuracy);
-    document.getElementById("testing__accuracy").innerHTML = "Accuracy: " + accuracy.toFixed(2) + "%";
+    document.getElementById("testing__accuracy").innerHTML = 
+                    "Accuracy: " + correct.toString() + "/" + N.toString() + "\t\t" + accuracy.toFixed(2) + "%";
 }

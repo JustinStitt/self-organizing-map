@@ -28,6 +28,7 @@ function setup(){
     createDiv('speed: ');
     fSlider = createSlider(0, FRAME_BUFFER, 
         FRAME_BUFFER/1.5, 1);
+    document.getElementById("data__entry").value = RAW_TRAINING_DATA;
 }
 
 /* Display epoch on screen */

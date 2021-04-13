@@ -29,7 +29,6 @@ class Node{
 
     /* Shift color of Node to be more like id by margin of VISU_ADJUST */
     shift(id, amnt){
-        this.id = id;
         let available = [0, 1, 2];
         available = available.filter((v, i, a) => {return v!=id;});
         // positive shift
@@ -43,6 +42,14 @@ class Node{
         for(let x = 0; x < 3; ++x){
             if(this.color[x] > 255) this.color[x] = 255;
         }
+        /* Change color based on highest color in RGB spectrum */
+        let max = 0;
+        for(let x = 1; x < 3; ++x){
+            if(this.color[x] > this.color[max]){
+                max = x;
+            }
+        }
+        this.id = max;
     }
 
     /* Adjust weights for Given node */
